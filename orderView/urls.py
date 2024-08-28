@@ -19,5 +19,6 @@ from manager import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.upload_csv, name= "upload_csv")
+    path("", views.upload_csv, name= "upload_csv"),
+    path('export_csv/', views.export_csv, name='export_csv'),
     ]

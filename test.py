@@ -38,7 +38,28 @@ def fetch_tracking_details(parcel_id):
         return description
     else:
         return None
-    
-x = fetch_parcel_details("EVR42749299")
-y= fetch_tracking_details(x)
-print(y)
+
+import json
+
+def load_d(filepath):
+    with open(filepath, "r") as file:
+        d = json.load(file)
+    return d
+
+def getStatus(d, p=0): 
+    dd  = d[p]['point']['externalDescription'] 
+    if "Receipt" not in dd:
+        if "Reprint" not in dd:
+            if "Parcel processed" not in dd:
+                print(dd)
+                return dd
+
+            
+    return getStatus(d,p+1)
+
+
+print(getStatus(load_d("testdata.json")))
+   
+# x = fetch_parcel_details("EVR42749299")
+# y= fetch_tracking_details(x)
+# print(y)
